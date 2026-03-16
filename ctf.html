@@ -1,0 +1,147 @@
+---
+layout: default
+title: CTF Writeups
+permalink: /ctf.html
+---
+
+<div class="container ctf-page">
+
+  <!-- Page header -->
+  <div class="page-header">
+    <h1 class="page-title">CTF Writeups</h1>
+    <div class="ctf-platform-stats">
+      <a href="{{ site.author.tryhackme }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link">
+        <img src="{{ '/assets/images/platforms/thm.png' | relative_url }}" alt="TryHackMe" class="platform-logo" onerror="this.style.display='none'">
+        <span>TryHackMe</span>
+        <strong>94 machines</strong>
+      </a>
+      <a href="{{ site.author.hackthebox }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link">
+        <img src="{{ '/assets/images/platforms/htb.png' | relative_url }}" alt="HackTheBox" class="platform-logo" onerror="this.style.display='none'">
+        <span>HackTheBox</span>
+        <strong>187 machines</strong>
+      </a>
+      <a href="{{ site.author.rootme }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link">
+        <img src="{{ '/assets/images/platforms/rootme.png' | relative_url }}" alt="Root-Me" class="platform-logo" onerror="this.style.display='none'">
+        <span>Root-Me</span>
+        <strong>2,450 points</strong>
+      </a>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="ctf-filters">
+    <div class="filter-search">
+      <input
+        type="text"
+        id="ctf-search"
+        placeholder="🔍 Rechercher un writeup..."
+        class="search-input"
+        autocomplete="off"
+      >
+    </div>
+
+    <div class="filter-groups">
+
+      <!-- Platform filter -->
+      <div class="filter-group">
+        <label class="filter-label">Plateforme :</label>
+        <div class="filter-btns">
+          <button class="filter-btn active" data-filter="platform" data-value="all">Tous</button>
+          <button class="filter-btn" data-filter="platform" data-value="tryhackme">
+            <i class="fas fa-flag"></i> TryHackMe
+          </button>
+          <button class="filter-btn" data-filter="platform" data-value="hackthebox">
+            <i class="fas fa-box"></i> HackTheBox
+          </button>
+          <button class="filter-btn" data-filter="platform" data-value="rootme">
+            <i class="fas fa-terminal"></i> Root-Me
+          </button>
+        </div>
+      </div>
+
+      <!-- Difficulty filter -->
+      <div class="filter-group">
+        <label class="filter-label">Difficulté :</label>
+        <div class="filter-btns">
+          <button class="filter-btn active" data-filter="difficulty" data-value="all">Tous</button>
+          <button class="filter-btn difficulty-easy"   data-filter="difficulty" data-value="easy">Easy</button>
+          <button class="filter-btn difficulty-medium" data-filter="difficulty" data-value="medium">Medium</button>
+          <button class="filter-btn difficulty-hard"   data-filter="difficulty" data-value="hard">Hard</button>
+        </div>
+      </div>
+
+      <!-- Sort -->
+      <div class="filter-group">
+        <label class="filter-label">Trier par :</label>
+        <select class="filter-select" id="ctf-sort">
+          <option value="newest">Plus récents</option>
+          <option value="oldest">Plus anciens</option>
+          <option value="title">Par titre</option>
+          <option value="difficulty">Par difficulté</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="filter-count">
+      <span id="ctf-count-num">0</span> writeups trouvés
+    </div>
+  </div>
+
+  <!-- CTF cards list -->
+  <div class="ctf-list" id="ctf-list">
+    {% assign ctf_posts = site.posts | where_exp: "post", "post.categories contains 'ctf'" %}
+    {% for post in ctf_posts %}
+    <article
+      class="ctf-card"
+      data-platform="{{ post.platform }}"
+      data-difficulty="{{ post.difficulty }}"
+      data-title="{{ post.title | downcase }}"
+      data-tags="{{ post.tags | join: ' ' | downcase }}"
+      data-date="{{ post.date | date: '%Y-%m-%d' }}"
+    >
+      <div class="ctf-card__header">
+        <h3 class="ctf-card__title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h3>
+        <div class="ctf-card__badges">
+          {% if post.platform %}
+          <span class="badge badge-platform badge-{{ post.platform }}">
+            {% if post.platform == 'hackthebox' %}HTB
+            {% elsif post.platform == 'tryhackme' %}THM
+            {% else %}{{ post.platform | upcase }}{% endif %}
+          </span>
+          {% endif %}
+          {% if post.difficulty %}
+          <span class="badge badge-difficulty badge-{{ post.difficulty }}">
+            {{ post.difficulty | capitalize }}
+          </span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if post.excerpt %}
+      <p class="ctf-card__excerpt">
+        {{ post.excerpt | strip_html | truncate: 160 }}
+      </p>
+      {% endif %}
+
+      <div class="ctf-card__footer">
+        <span class="ctf-date">
+          <i class="fas fa-calendar-alt"></i>
+          {{ post.date | date: "%d/%m/%Y" }}
+        </span>
+        {% if post.tags.size > 0 %}
+        <div class="ctf-card__tags">
+          {% for tag in post.tags limit: 4 %}
+          <span class="tag tag--small">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+    </article>
+    {% endfor %}
+  </div>
+
+</div>

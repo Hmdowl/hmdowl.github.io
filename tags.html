@@ -1,0 +1,35 @@
+---
+layout: default
+title: Tags
+permalink: /tags.html
+---
+
+{% assign all_tags = site.posts | map: 'tags' | join: '|' | split: '|' | uniq | sort %}
+
+<div class="container tags-page">
+
+  <div class="page-header">
+    <h1 class="page-title">Tags</h1>
+  </div>
+
+  <div class="tag-cloud-page">
+    {% for tag in all_tags %}
+      {% if tag != '' %}
+        {% assign count = 0 %}
+        {% for post in site.posts %}
+          {% if post.tags contains tag %}{% assign count = count | plus: 1 %}{% endif %}
+        {% endfor %}
+
+        {% if count >= 10 %}{% assign size_class = 'tsize-5' %}
+        {% elsif count >= 6 %}{% assign size_class = 'tsize-4' %}
+        {% elsif count >= 4 %}{% assign size_class = 'tsize-3' %}
+        {% elsif count >= 2 %}{% assign size_class = 'tsize-2' %}
+        {% else %}{% assign size_class = 'tsize-1' %}
+        {% endif %}
+
+        <a href="{{ '/tags/' | append: tag | slugify | relative_url }}" class="tag-cloud-word {{ size_class }}">{{ tag }} <span class="tag-cloud-count">({{ count }})</span></a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</div>

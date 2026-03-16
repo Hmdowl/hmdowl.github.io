@@ -1,0 +1,88 @@
+<div class="sidebar-inner">
+
+  <!-- Search -->
+  <div class="sidebar-search">
+    <i class="fas fa-search sidebar-search__icon" aria-hidden="true"></i>
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Rechercher..."
+      class="search-input"
+      autocomplete="off"
+      aria-label="Rechercher"
+    >
+    <div id="search-results" class="search-results" role="listbox" aria-label="Résultats de recherche"></div>
+  </div>
+
+  <!-- Who Am I — style sckull -->
+  <div class="whoami-wrap">
+
+    <!-- Photo -->
+    <div class="whoami__image-wrapper">
+      <img
+        class="whoami__image"
+        src="{{ site.author.avatar | default: '/assets/images/avatar.png' | relative_url }}"
+        alt="{{ site.author.name | default: 'Howl' }}"
+        loading="lazy"
+        onerror="this.style.opacity='0'"
+      >
+    </div>
+
+    <!-- Infos auteur — en dehors des traits -->
+    <div class="whoami__contents">
+      <div class="whoami__title">{{ site.author.name | default: "Hamed LOUMA" }}</div>
+
+      {% if site.author.pseudo and site.author.pseudo != '' %}
+      <p class="whoami__meta"><i class="fas fa-flag"></i> {{ site.author.pseudo }}</p>
+      {% endif %}
+
+      {% if site.author.location and site.author.location != '' %}
+      <p class="whoami__meta"><i class="fas fa-crosshairs"></i> {{ site.author.location }}</p>
+      {% endif %}
+
+      {% if site.author.site and site.author.site != '' %}
+      <a href="{{ site.author.site }}" class="whoami__meta whoami__meta--link" target="_blank" rel="noopener">
+        <i class="fas fa-link"></i> {{ site.author.site }}
+      </a>
+      {% endif %}
+
+      <div class="whoami__social">
+        <!-- LinkedIn — lien à renseigner dans _config.yml (author.linkedin) -->
+        <a href="{{ site.author.linkedin | default: '#' }}" class="social-link" title="LinkedIn" {% if site.author.linkedin and site.author.linkedin != '' %}target="_blank" rel="noopener"{% endif %}>
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <!-- Discord — lien à renseigner dans _config.yml (author.discord) -->
+        <a href="{{ site.author.discord | default: '#' }}" class="social-link" title="Discord" {% if site.author.discord and site.author.discord != '' %}target="_blank" rel="noopener"{% endif %}>
+          <i class="fab fa-discord"></i>
+        </a>
+        <!-- GitHub — lien à renseigner dans _config.yml (author.github) -->
+        <a href="{% if site.author.github and site.author.github != '' %}https://github.com/{{ site.author.github }}{% else %}#{% endif %}" class="social-link" title="GitHub" {% if site.author.github and site.author.github != '' %}target="_blank" rel="noopener"{% endif %}>
+          <i class="fab fa-github"></i>
+        </a>
+        <!-- Email — lien à renseigner dans _config.yml (author.email) -->
+        <a href="{% if site.author.email and site.author.email != '' %}mailto:{{ site.author.email }}{% else %}#{% endif %}" class="social-link social-link--email" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Recent Posts -->
+  <div class="sidebar-section">
+    <h4 class="sidebar-title">Posts récents</h4>
+    <ul class="recent-posts">
+      {% for post in site.posts limit: 6 %}
+      <li>
+        <a href="{{ post.url | relative_url }}" class="recent-post__link">
+          <span class="recent-post__title">{{ post.title | truncate: 38 }}</span>
+          <span class="recent-post__date">{{ post.date | date: "%d/%m/%y" }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+
+</div>

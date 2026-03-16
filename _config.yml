@@ -1,0 +1,69 @@
+title: "Howl"
+description: "Étudiant en Cybersécurité | CTF Player - Blog de writeups CTF et projets de cybersécurité"
+baseurl: ""
+url: ""
+
+author:
+  name: "Hamed LOUMA"
+  pseudo: "Howl"
+  location: "France"
+  tagline: "Étudiant en Cybersécurité | CTF Player"
+  bio: "Étudiant en cybersécurité passionné par les CTF, les writeups et la recherche de vulnérabilités."
+  availability: "Disponible pour stage de 3 à 4 mois à partir de mars 2026"
+  avatar: "/assets/images/avatar.png"
+  emoji: "✍️"
+  github: "Hmdowl"
+  linkedin: "https://www.linkedin.com/in/hamed-otila-a-louma-a5656a365"
+  twitter: ""
+  discord: "https://discord.com/users/987052580347711558"
+  telegram: ""
+  email: ""
+  site: "https://howl.github.io"
+  tryhackme: "https://tryhackme.com/p/Howl2"
+  hackthebox: "https://app.hackthebox.com/public/users/3114505"
+  rootme: "https://www.root-me.org/Howl2?lang=fr#69468a94d41a4f1e17426e5bd080cfeb"
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    block:
+      line_numbers: false
+
+# Permalink
+permalink: /:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Howl"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - "*.sh"

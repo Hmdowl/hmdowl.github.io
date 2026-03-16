@@ -1,0 +1,77 @@
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <div class="header-logo">
+      <a href="{{ '/' | relative_url }}" class="logo-link">
+        <img
+          src="{{ '/assets/images/favicon.png' | relative_url }}"
+          alt="Howl"
+          class="logo-img"
+          onerror="this.style.display='none'"
+        >
+        <span class="site-logo glitch" data-text="Howl">Howl</span>
+      </a>
+    </div>
+
+    <!-- Centre : theme + nav groupés -->
+    <div class="header-center">
+
+      <!-- Theme selector (avant les onglets) -->
+      <div class="theme-selector" id="theme-selector">
+        <button class="theme-btn" id="theme-btn" aria-label="Changer de thème" title="Changer de thème">
+          <i class="fas fa-tint"></i>
+        </button>
+        <div class="theme-dropdown" id="theme-dropdown" role="menu">
+          <button class="theme-option" data-theme="dark"  role="menuitem">
+            <span class="theme-dot theme-dot--dark"></span> dark
+          </button>
+          <button class="theme-option" data-theme="light" role="menuitem">
+            <span class="theme-dot theme-dot--light"></span> light
+          </button>
+          <button class="theme-option" data-theme="htb"   role="menuitem">
+            <span class="theme-dot theme-dot--htb"></span> htb
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <a href="{{ '/' | relative_url }}"            class="nav-link glitch-hover" data-text="Blog">Blog</a>
+        <a href="{{ '/ctf.html' | relative_url }}"    class="nav-link glitch-hover" data-text="CTF">CTF</a>
+        <a href="{{ '/projets.html' | relative_url }}" class="nav-link glitch-hover" data-text="Projets">Projets</a>
+        <a href="{{ '/about.html' | relative_url }}"  class="nav-link glitch-hover" data-text="About">About</a>
+        <a href="{{ '/tags.html' | relative_url }}" class="nav-link glitch-hover" data-text="Tags">Tags</a>
+      </nav>
+
+    </div>
+
+    <!-- Mobile search toggle -->
+    <button class="mobile-search-btn" id="mobile-search-btn" aria-label="Rechercher">
+      <i class="fas fa-search"></i>
+    </button>
+
+    <!-- Mobile menu toggle -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile search bar (dropdown sous le header) -->
+  <div class="mobile-search-bar" id="mobile-search-bar">
+    <i class="fas fa-search mobile-search-bar__icon" aria-hidden="true"></i>
+    <input
+      type="text"
+      id="mobile-search-input"
+      placeholder="Rechercher..."
+      class="search-input"
+      autocomplete="off"
+      aria-label="Rechercher"
+    >
+    <div id="mobile-search-results" class="search-results" role="listbox"></div>
+  </div>
+
+</header>

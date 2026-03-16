@@ -1,0 +1,59 @@
+<!-- Social bar — avant le footer -->
+<div class="pre-footer-social">
+  <a href="{{ site.author.linkedin | default: '#' }}" class="pre-footer-link pre-footer-link--linkedin" title="LinkedIn" {% if site.author.linkedin and site.author.linkedin != '' %}target="_blank" rel="noopener"{% endif %}>
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <a href="{{ site.author.discord | default: '#' }}" class="pre-footer-link pre-footer-link--discord" title="Discord" {% if site.author.discord and site.author.discord != '' %}target="_blank" rel="noopener"{% endif %}>
+    <i class="fab fa-discord"></i>
+  </a>
+  <a href="{% if site.author.github and site.author.github != '' %}https://github.com/{{ site.author.github }}{% else %}#{% endif %}" class="pre-footer-link pre-footer-link--github" title="GitHub" {% if site.author.github and site.author.github != '' %}target="_blank" rel="noopener"{% endif %}>
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="{% if site.author.email and site.author.email != '' %}mailto:{{ site.author.email }}{% else %}#{% endif %}" class="pre-footer-link pre-footer-link--email" title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+
+    <!-- Platform stats -->
+    <div class="footer-stats">
+      <a href="{{ site.author.tryhackme }}" target="_blank" rel="noopener" class="footer-stat">
+        <img
+          src="{{ '/assets/images/platforms/thm.png' | relative_url }}"
+          alt="TryHackMe"
+          class="platform-logo"
+          onerror="this.style.display='none'"
+        >
+        TryHackMe: Rank #1,234 | 94 machines
+      </a>
+      <span class="footer-separator" aria-hidden="true">|</span>
+      <a href="{{ site.author.hackthebox }}" target="_blank" rel="noopener" class="footer-stat">
+        <img
+          src="{{ '/assets/images/platforms/htb.png' | relative_url }}"
+          alt="HackTheBox"
+          class="platform-logo"
+          onerror="this.style.display='none'"
+        >
+        HackTheBox: Pro Hacker | 187 machines
+      </a>
+      <span class="footer-separator" aria-hidden="true">|</span>
+      <a href="{{ site.author.rootme }}" target="_blank" rel="noopener" class="footer-stat">
+        <img
+          src="{{ '/assets/images/platforms/rootme.png' | relative_url }}"
+          alt="Root-Me"
+          class="platform-logo"
+          onerror="this.style.display='none'"
+        >
+        RootMe: 2,450 points | 23 challenges
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copy">
+      ©2026 - Généré avec <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> | Tous droits réservés
+    </div>
+
+  </div>
+</footer>
