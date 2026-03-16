@@ -1841,23 +1841,23 @@ a.tag:hover {
 }
 
 .about-intro__text {
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--text);
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .about-intro__sub {
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 0.5rem;
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
 }
 
 /* ── Qui je suis : 2 colonnes ── */
 .about-identity {
   display: grid;
-  grid-template-columns: 35% 1fr;
+  grid-template-columns: 25% 1fr;
   gap: 2rem;
   align-items: stretch;
 }
@@ -2035,7 +2035,7 @@ a.tag:hover {
 }
 
 .about-skill-group__title {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -2055,8 +2055,8 @@ a.tag:hover {
   border: 1px solid var(--accent);
   color: var(--accent);
   border-radius: 20px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.82rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
@@ -2296,6 +2296,30 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
 .erasmus-item__info span {
   font-size: 0.77rem;
   color: var(--text-muted);
+}
+
+/* ── CV Download ── */
+.cv-download {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.cv-download__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.cv-download__btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 /* ── Responsive ── */

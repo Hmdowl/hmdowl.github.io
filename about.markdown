@@ -35,21 +35,20 @@ permalink: /about.html
       <div class="about-identity__text">
         <p>
           Je m'appelle <strong>OTILA A LOUMA Hamed</strong>, aussi connu sous le pseudo <strong style="color: var(--accent)">Howl</strong>.
-          Je suis étudiant en cybersécurité en France.
+          Je suis en dernière année de cycle ingénieur cybersécurité en France.
         </p>
         <p>
-          <strong>Mon déclic ?</strong> J'ai été victime de phishing il y a quelque temps et j'ai perdu beaucoup de données personnelles.
-          Cette expérience m'a ouvert les yeux sur l'importance de la sécurité informatique et m'a poussé à comprendre
-          comment fonctionnent vraiment les attaques.
+          <strong>Mon déclic ?</strong> En première année d'école d'ingénieur, j'ai été victime de phishing et j'ai perdu beaucoup de données personnelles.
+          Cette expérience m'a fait réaliser l'importance de la cybersécurité et m'a poussé à choisir cette spécialisation.
         </p>
         <p>
-          Depuis, ma passion est de protéger les systèmes et d'aider les autres à se défendre. Je me suis lancé dans les CTF
-          pour apprendre les techniques d'attaque afin de mieux comprendre comment s'en défendre.
+          Depuis, ma passion est de protéger les systèmes en comprenant comment fonctionnent vraiment les attaques.
+          Je me suis lancé dans les CTF pour apprendre les techniques offensives et mieux savoir m'en défendre.
         </p>
         <p>
-          Actuellement en formation en Sécurité Informatique, je suis au début de mon parcours mais déterminé à progresser
-          chaque jour. Chaque machine pwned, chaque writeup écrit, c'est une étape de plus vers mon objectif :
-          devenir expert en cybersécurité et aider à sécuriser les infrastructures.
+          Actuellement en dernière année de formation, je consolide mes connaissances à travers la pratique.
+          Chaque machine pwned, chaque writeup écrit, c'est une étape vers mon objectif : devenir expert
+          en cybersécurité et aider à sécuriser les infrastructures.
         </p>
       </div>
     </div>
@@ -230,6 +229,13 @@ permalink: /about.html
       </div>
 
     </div>
+
+    <div class="cv-download">
+      <a href="{{ '/assets/cv/cv-hamed-louma.pdf' | relative_url }}" class="cv-download__btn" download>
+        <i class="fas fa-file-pdf"></i> Télécharger mon CV
+      </a>
+    </div>
+
   </div>
 
 </div>

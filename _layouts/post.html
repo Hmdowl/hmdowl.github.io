@@ -43,7 +43,7 @@ layout: default
       {% if page.tags.size > 0 %}
       <div class="post-tags">
         {% for tag in page.tags %}
-        <a href="{{ '/ctf.html' | relative_url }}#{{ tag }}" class="tag">#{{ tag }}</a>
+        <span class="tag">#{{ tag }}</span>
         {% endfor %}
       </div>
       {% endif %}
