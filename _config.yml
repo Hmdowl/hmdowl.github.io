@@ -1,7 +1,7 @@
 title: "Howl"
 description: "Étudiant en Cybersécurité | CTF Player - Blog de writeups CTF et projets de cybersécurité"
-baseurl: ""
-url: ""
+baseurl: "/Site-Howl"
+url: "https://hmdowl.github.io"
 
 author:
   name: "Hamed LOUMA"
