@@ -2672,7 +2672,7 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
 
 .post-content div.highlight pre {
   border-radius: 0 0 6px 6px;
-  padding: 0.6rem 1rem 0.6rem 0;
+  padding: 0.6rem 1rem 0.6rem 0.9rem;
   margin-top: 0;
   overflow-x: auto;
   background: #1e1e1e;
@@ -2680,27 +2680,6 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
 }
 
 /* Numéros de lignes */
-.has-line-numbers { display: flex !important; overflow: hidden; }
-.has-line-numbers code { counter-reset: line-num; flex: 1; min-width: 0; overflow-x: auto; }
-.has-line-numbers .code-line {
-  display: block;
-  counter-increment: line-num;
-  white-space: pre;
-  line-height: 1.4;
-}
-.has-line-numbers .code-line::before {
-  content: counter(line-num);
-  display: inline-block;
-  width: 1.6rem;
-  color: #4a4a4a;
-  text-align: right;
-  padding-right: 0.65rem;
-  margin-right: 0.65rem;
-  border-right: 1px solid #2e2e2e;
-  user-select: none;
-  font-size: 1em;
-  opacity: 0.6;
-}
 
 .copy-btn {
   position: absolute;
@@ -3165,6 +3144,16 @@ a.footer-stat:hover {
   /* Sidebar entière cachée sur mobile (photo + posts récents) */
   .sidebar {
     display: none;
+  }
+
+  /* Espace entre le hero et les posts */
+  .post-list {
+    margin-top: 1.5rem;
+  }
+
+  /* Padding du container layout sur mobile */
+  .layout-with-sidebar {
+    padding-top: 1rem;
   }
 
   /* Profile card cachée sur mobile */

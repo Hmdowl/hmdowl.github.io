@@ -95,20 +95,6 @@ layout: default
     });
     div.appendChild(btn);
 
-    // Numéros de lignes pour blocs 2+ lignes
-    var codeEl = div.querySelector('code');
-    if (codeEl) {
-      var raw = codeEl.innerText.replace(/\n$/, '');
-      var lineCount = raw.split('\n').length;
-      if (lineCount >= 2) {
-        var lines = codeEl.innerHTML.split('\n');
-        if (lines[lines.length - 1] === '') lines.pop();
-        codeEl.innerHTML = lines.map(function(l) {
-          return '<span class="code-line">' + l + '</span>';
-        }).join('\n');
-        div.querySelector('pre').classList.add('has-line-numbers');
-      }
-    }
   });
 
   // Lightbox pour les images
