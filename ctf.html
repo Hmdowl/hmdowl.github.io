@@ -119,7 +119,7 @@ permalink: /ctf.html
         <div class="post-card__meta">
           <span class="post-date">
             <span class="author-emoji">📅</span>
-            {{ post.date | date: "%d %B %Y" }}
+            {% include date_fr.html date=post.date %}
           </span>
           <span class="post-author">
             <span class="author-emoji">{{ site.author.emoji | default: "🐺" }}</span>

@@ -12,7 +12,7 @@ layout: default
         <h1 class="post-title">{{ page.title }}</h1>
       </div>
       <div class="post-meta">
-        <span><i class="fas fa-calendar-alt"></i> {{ page.date | date: "%d %B %Y" }}</span>
+        <span><i class="fas fa-calendar-alt"></i> {% include date_fr.html date=page.date %}</span>
       </div>
       {% if page.tags.size > 0 %}
       <div class="post-tags">
@@ -94,6 +94,43 @@ layout: default
       });
     });
     div.appendChild(btn);
+
+    // Numéros de lignes pour blocs 2+ lignes
+    var codeEl = div.querySelector('code');
+    if (codeEl) {
+      var raw = codeEl.innerText.replace(/\n$/, '');
+      var lineCount = raw.split('\n').length;
+      if (lineCount >= 2) {
+        var lines = codeEl.innerHTML.split('\n');
+        if (lines[lines.length - 1] === '') lines.pop();
+        codeEl.innerHTML = lines.map(function(l) {
+          return '<span class="code-line">' + l + '</span>';
+        }).join('\n');
+        div.querySelector('pre').classList.add('has-line-numbers');
+      }
+    }
+  });
+
+  // Lightbox pour les images
+  var overlay = document.createElement('div');
+  overlay.id = 'img-lightbox';
+  overlay.innerHTML = '<img id="img-lightbox-img"><span id="img-lightbox-close">&times;</span>';
+  document.body.appendChild(overlay);
+
+  document.querySelectorAll('.post-content img').forEach(function(img) {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function() {
+      document.getElementById('img-lightbox-img').src = img.src;
+      overlay.classList.add('active');
+    });
+  });
+
+  overlay.addEventListener('click', function() {
+    overlay.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') overlay.classList.remove('active');
   });
 })();
 </script>
@@ -105,33 +142,74 @@ layout: default
   const nav = document.getElementById('toc-nav');
   if (!nav || headings.length === 0) return;
 
-  const ul = document.createElement('ul');
+  // Assigne les IDs
   headings.forEach(function(h) {
     if (!h.id) {
       h.id = h.textContent.trim().toLowerCase()
         .replace(/[^\w\u00C0-\u024F]+/g, '-').replace(/^-|-$/g, '');
     }
+  });
+
+  // Construit le TOC : H3 imbriqués sous leur H2 parent
+  const ul = document.createElement('ul');
+  let currentH2Li = null;
+  let currentSubUl = null;
+
+  headings.forEach(function(h) {
     const li = document.createElement('li');
-    li.className = h.tagName === 'H3' ? 'toc-h3' : h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
     const a = document.createElement('a');
     a.href = '#' + h.id;
     a.textContent = h.textContent;
     li.appendChild(a);
-    ul.appendChild(li);
+
+    if (h.tagName === 'H1' || h.tagName === 'H2') {
+      li.className = h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
+      ul.appendChild(li);
+      currentH2Li = li;
+      currentSubUl = null;
+    } else if (h.tagName === 'H3') {
+      li.className = 'toc-h3';
+      if (!currentSubUl) {
+        currentSubUl = document.createElement('ul');
+        currentSubUl.className = 'toc-sub';
+        if (currentH2Li) currentH2Li.appendChild(currentSubUl);
+        else ul.appendChild(currentSubUl);
+      }
+      currentSubUl.appendChild(li);
+    }
   });
   nav.appendChild(ul);
 
-  // Surligne la section active
+  // Cache tous les sous-menus par défaut
+  nav.querySelectorAll('.toc-sub').forEach(function(sub) {
+    sub.style.display = 'none';
+  });
+
+  // Scroll : surligne + révèle les H3 de la section active
   const links = nav.querySelectorAll('a');
-  window.addEventListener('scroll', function() {
+
+  function updateToc() {
     let current = '';
+    let currentParent = '';
     headings.forEach(function(h) {
-      if (window.scrollY >= h.offsetTop - 120) current = h.id;
+      if (window.scrollY >= h.offsetTop - 120) {
+        current = h.id;
+        if (h.tagName === 'H1' || h.tagName === 'H2') currentParent = h.id;
+      }
     });
     links.forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
-  });
+    nav.querySelectorAll('.toc-h1, .toc-h2').forEach(function(li) {
+      const sub = li.querySelector('.toc-sub');
+      if (!sub) return;
+      const a = li.querySelector('a');
+      sub.style.display = (a && a.getAttribute('href') === '#' + currentParent) ? 'block' : 'none';
+    });
+  }
+
+  window.addEventListener('scroll', updateToc);
+  updateToc();
 
   // Toggle affichage
   const checkbox = document.getElementById('toc-checkbox');

