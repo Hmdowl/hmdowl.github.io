@@ -2,44 +2,17 @@
 layout: default
 ---
 
-<div class="container layout-with-sidebar">
+<div class="post-wrapper">
 
-  <aside class="sidebar">
-    {% include sidebar.html %}
-  </aside>
-
-  <article class="main-content post-page">
+  <!-- Contenu principal -->
+  <article class="post-article">
 
     <header class="post-header">
-      <div class="post-meta">
-        <span class="post-date">
-          <span class="author-emoji">📅</span>
-          {{ page.date | date: "%d %B %Y" }}
-        </span>
-        <span class="post-author">
-          <span class="author-emoji">{{ site.author.emoji | default: "🐺" }}</span>
-          {{ page.author | default: site.author.name }}
-        </span>
-        {% if page.platform %}
-        <span class="post-platform platform-{{ page.platform }}">
-          {% if page.platform == 'hackthebox' %}
-            <i class="fas fa-box"></i> HackTheBox
-          {% elsif page.platform == 'tryhackme' %}
-            <i class="fas fa-flag"></i> TryHackMe
-          {% else %}
-            <i class="fas fa-terminal"></i> {{ page.platform }}
-          {% endif %}
-        </span>
-        {% endif %}
-        {% if page.difficulty %}
-        <span class="difficulty difficulty-{{ page.difficulty }}">
-          {{ page.difficulty | capitalize }}
-        </span>
-        {% endif %}
-      </div>
-
       <h1 class="post-title">{{ page.title }}</h1>
-
+      <div class="post-meta">
+        <span><i class="fas fa-calendar-alt"></i> {{ page.date | date: "%d %B %Y" }}</span>
+        {% if page.difficulty %}<span class="difficulty difficulty-{{ page.difficulty }}">{{ page.difficulty | capitalize }}</span>{% endif %}
+      </div>
       {% if page.tags.size > 0 %}
       <div class="post-tags">
         {% for tag in page.tags %}
@@ -69,4 +42,49 @@ layout: default
     </footer>
 
   </article>
+
+  <!-- Sommaire à droite -->
+  <aside class="post-toc">
+    <div class="post-toc__inner">
+      <p class="post-toc__title">Sommaire</p>
+      <nav id="toc-nav"></nav>
+    </div>
+  </aside>
+
 </div>
+
+<script>
+// Génère le sommaire automatiquement à partir des H2/H3 du contenu
+(function() {
+  const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+  const nav = document.getElementById('toc-nav');
+  if (!nav || headings.length === 0) return;
+
+  const ul = document.createElement('ul');
+  headings.forEach(function(h) {
+    if (!h.id) {
+      h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9\u00C0-\u024F]+/g, '-').replace(/^-|-$/g, '');
+    }
+    const li = document.createElement('li');
+    li.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  nav.appendChild(ul);
+
+  // Surligne la section active au scroll
+  const links = nav.querySelectorAll('a');
+  window.addEventListener('scroll', function() {
+    let current = '';
+    headings.forEach(function(h) {
+      if (window.scrollY >= h.offsetTop - 100) current = h.id;
+    });
+    links.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+})();
+</script>

@@ -2451,6 +2451,84 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
    16. POST CONTENT (Article)
    ============================================================ */
 
+/* ── Layout post pleine largeur + TOC ── */
+.post-wrapper {
+  display: flex;
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  align-items: flex-start;
+}
+
+.post-article {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Sommaire fixe à droite */
+.post-toc {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
+
+.post-toc__inner {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.post-toc__title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+#toc-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+#toc-nav li a {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 0.5rem;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1.4;
+}
+
+#toc-nav li a:hover,
+#toc-nav li a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+#toc-nav li.toc-h3 a {
+  padding-left: 1rem;
+  font-size: 0.74rem;
+}
+
+@media (max-width: 900px) {
+  .post-wrapper { flex-direction: column; }
+  .post-toc { width: 100%; position: static; }
+}
+
 .post-page {
   padding-bottom: 4rem;
 }
