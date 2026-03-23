@@ -899,7 +899,14 @@ body::after  { right: max(0px, calc(50% - 530px)); }
 /* Partie texte — sous la photo */
 .whoami__contents {
   width: 100%;
-  padding: 0.7rem 0.9rem 0.75rem;
+  padding: 0 0.9rem 0.75rem;
+}
+
+.whoami__contents::before {
+  content: '';
+  display: block;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0.2rem;
 }
 
 .whoami__written-by {
@@ -916,6 +923,7 @@ body::after  { right: max(0px, calc(50% - 530px)); }
   font-weight: 700;
   color: var(--text);
   font-family: 'Mulish', sans-serif;
+  margin-top: 0.15rem;
   margin-bottom: 0.55rem;
   text-align: center;
 }
@@ -1535,11 +1543,24 @@ a.tag:hover {
   transition: border-color 0.2s, transform 0.15s;
 }
 
-.platform-stat--link:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  color: var(--text);
-}
+.platform-stat--link:hover { transform: translateY(-2px); color: var(--text); }
+
+/* Couleurs par plateforme */
+.platform-stat--thm { border-color: rgba(255, 255, 255, 0.3); }
+.platform-stat--thm:hover { border-color: #fff; }
+.platform-stat--thm strong { color: #fff; }
+
+.platform-stat--htb { border-color: rgba(159, 239, 0, 0.4); }
+.platform-stat--htb:hover { border-color: #9fef00; }
+.platform-stat--htb strong { color: #9fef00; }
+
+.platform-stat--rootme { border-color: rgba(80, 80, 80, 0.5); }
+.platform-stat--rootme:hover { border-color: #555; }
+.platform-stat--rootme strong { color: #aaa; }
+
+/* Fond logo */
+.platform-logo--htb { background: #fff; border-radius: 3px; padding: 2px; }
+.platform-logo--rootme { background: #1a1a1a; border-radius: 3px; padding: 2px; }
 
 .platform-stat i {
   color: var(--accent);
