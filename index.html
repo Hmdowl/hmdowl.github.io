@@ -24,9 +24,21 @@ title: Blog
         data-excerpt="{{ post.excerpt | strip_html | downcase | truncate: 200 }}"
       >
         <div class="post-card__header">
-          <h2 class="post-card__title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h2>
+          <div class="post-card__title-row">
+            <h2 class="post-card__title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            {% if post.platform %}
+            {% assign _logo = post.platform %}
+            {% if post.platform == 'tryhackme' %}{% assign _logo = 'thm' %}{% endif %}
+            <img
+              src="{{ '/assets/images/platforms/' | append: _logo | append: '.png' | relative_url }}"
+              alt="{{ post.platform }}"
+              class="post-card__platform-logo"
+              onerror="this.style.display='none'"
+            >
+            {% endif %}
+          </div>
           <div class="post-card__meta">
             <span class="post-date">
               <span class="author-emoji">📅</span>
@@ -36,18 +48,6 @@ title: Blog
               <span class="author-emoji">{{ site.author.emoji | default: "🐺" }}</span>
               {{ post.author | default: site.author.name }}
             </span>
-            {% if post.platform %}
-            <span class="post-platform platform-{{ post.platform }}">
-              {% if post.platform == 'hackthebox' %}HackTheBox
-              {% elsif post.platform == 'tryhackme' %}TryHackMe
-              {% else %}{{ post.platform }}{% endif %}
-            </span>
-            {% endif %}
-            {% if post.difficulty %}
-            <span class="difficulty difficulty-{{ post.difficulty }}">
-              {{ post.difficulty | capitalize }}
-            </span>
-            {% endif %}
           </div>
         </div>
 

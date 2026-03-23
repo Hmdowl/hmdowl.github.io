@@ -8,10 +8,11 @@ layout: default
   <article class="post-article">
 
     <header class="post-header">
-      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="post-title-row">
+        <h1 class="post-title">{{ page.title }}</h1>
+      </div>
       <div class="post-meta">
         <span><i class="fas fa-calendar-alt"></i> {{ page.date | date: "%d %B %Y" }}</span>
-        {% if page.difficulty %}<span class="difficulty difficulty-{{ page.difficulty }}">{{ page.difficulty | capitalize }}</span>{% endif %}
       </div>
       {% if page.tags.size > 0 %}
       <div class="post-tags">
@@ -43,10 +44,16 @@ layout: default
 
   </article>
 
-  <!-- Sommaire à droite -->
-  <aside class="post-toc">
-    <div class="post-toc__inner">
-      <p class="post-toc__title">Sommaire</p>
+  <!-- TOC à droite avec toggle -->
+  <aside class="post-toc" id="post-toc">
+    <div class="post-toc__header">
+      <span class="post-toc__name">{{ page.title }}</span>
+      <label class="toc-toggle" for="toc-checkbox" title="Afficher/Masquer">
+        <input type="checkbox" id="toc-checkbox" checked>
+        <span class="toc-toggle__dot"></span>
+      </label>
+    </div>
+    <div class="post-toc__body" id="toc-body">
       <nav id="toc-nav"></nav>
     </div>
   </aside>
@@ -54,19 +61,58 @@ layout: default
 </div>
 
 <script>
-// Génère le sommaire automatiquement à partir des H2/H3 du contenu
 (function() {
-  const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+  // Ajoute data-lang + bouton copier sur les blocs de code
+  document.querySelectorAll('.post-content div.highlight').forEach(function(div) {
+    var code = div.querySelector('code');
+    if (code) {
+      var lang = Array.from(code.classList).find(function(c) { return c.startsWith('language-'); });
+      if (lang) div.setAttribute('data-lang', lang.replace('language-', ''));
+    }
+    // fallback: cherche sur le div lui-même
+    if (!div.hasAttribute('data-lang')) {
+      var cls = Array.from(div.classList).find(function(c) { return c.startsWith('language-'); });
+      if (cls) div.setAttribute('data-lang', cls.replace('language-', ''));
+    }
+    // fallback: cherche sur le div parent (Rouge génère language-bash sur le wrapper)
+    if (!div.hasAttribute('data-lang') && div.parentElement) {
+      var pcls = Array.from(div.parentElement.classList).find(function(c) { return c.startsWith('language-'); });
+      if (pcls) div.setAttribute('data-lang', pcls.replace('language-', ''));
+    }
+    // Bouton copier
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    btn.title = 'Copier';
+    btn.addEventListener('click', function() {
+      var text = div.querySelector('code') ? div.querySelector('code').innerText : div.innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(function() {
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 1500);
+      });
+    });
+    div.appendChild(btn);
+  });
+})();
+</script>
+
+<script>
+(function() {
+  // Génère le TOC
+  const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3');
   const nav = document.getElementById('toc-nav');
   if (!nav || headings.length === 0) return;
 
   const ul = document.createElement('ul');
   headings.forEach(function(h) {
     if (!h.id) {
-      h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9\u00C0-\u024F]+/g, '-').replace(/^-|-$/g, '');
+      h.id = h.textContent.trim().toLowerCase()
+        .replace(/[^\w\u00C0-\u024F]+/g, '-').replace(/^-|-$/g, '');
     }
     const li = document.createElement('li');
-    li.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
+    li.className = h.tagName === 'H3' ? 'toc-h3' : h.tagName === 'H1' ? 'toc-h1' : 'toc-h2';
     const a = document.createElement('a');
     a.href = '#' + h.id;
     a.textContent = h.textContent;
@@ -75,16 +121,23 @@ layout: default
   });
   nav.appendChild(ul);
 
-  // Surligne la section active au scroll
+  // Surligne la section active
   const links = nav.querySelectorAll('a');
   window.addEventListener('scroll', function() {
     let current = '';
     headings.forEach(function(h) {
-      if (window.scrollY >= h.offsetTop - 100) current = h.id;
+      if (window.scrollY >= h.offsetTop - 120) current = h.id;
     });
     links.forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
+  });
+
+  // Toggle affichage
+  const checkbox = document.getElementById('toc-checkbox');
+  const body = document.getElementById('toc-body');
+  checkbox.addEventListener('change', function() {
+    body.style.display = this.checked ? 'block' : 'none';
   });
 })();
 </script>

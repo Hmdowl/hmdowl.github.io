@@ -6,6 +6,7 @@ categories: [CTF, TryHackMe]
 tags: [hydra, brute-force, ssh, http-post-form, wordlist, rockyou, easy, tryhackme]
 difficulty: easy
 platform: tryhackme
+excerpt: "Hydra est un outil puissant de craquage de mots de passe à distance, intégré par défaut dans Kali Linux, utilisé principalement pour des tests d'intrusion éthiques. Son but : tester automatiquement des milliers de combinaisons login/mot de passe jusqu'à trouver la bonne."
 ---
 
 # C'est quoi Hydra ?
@@ -64,7 +65,7 @@ Ici `^USER^` et `^PASS^` sont remplacés automatiquement par Hydra.
 
 ---
 
-## La wordlist incontournable : `rockyou.txt`
+### La wordlist incontournable : `rockyou.txt`
 
 C'est **la** wordlist de référence en CTF. Elle contient **14 millions** de mots de passe issus d'une vraie fuite de données.
 
@@ -73,7 +74,7 @@ Sur Kali Linux elle est déjà là :
 /usr/share/wordlists/rockyou.txt
 ```
 
-### Checklist avant de lancer Hydra sur un formulaire web
+#### Checklist avant de lancer Hydra sur un formulaire web
 
 **1. Trouver la bonne route**
 - Faire un faux login et intercepter la requête avec **Burp Suite**
