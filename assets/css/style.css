@@ -2454,21 +2454,24 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
 /* ── Layout post pleine largeur + TOC ── */
 .post-wrapper {
   display: flex;
-  gap: 2.5rem;
-  max-width: 1100px;
+  gap: 0;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 3rem 1.5rem 5rem;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .post-article {
-  flex: 1;
+  max-width: 720px;
+  width: 100%;
   min-width: 0;
+  padding-right: 2.5rem;
 }
 
 /* Sommaire fixe à droite */
 .post-toc {
-  width: 220px;
+  width: 200px;
   flex-shrink: 0;
   position: sticky;
   top: 5rem;
