@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "TryHackMe — Hydra"
-date: 2026-03-23
+date: 2026-03-14
 categories: [CTF, TryHackMe]
 tags: [hydra, brute-force, ssh, http-post-form, wordlist, rockyou, easy, tryhackme]
 difficulty: easy
