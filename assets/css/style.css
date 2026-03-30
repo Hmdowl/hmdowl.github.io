@@ -1099,6 +1099,7 @@ a.tag:hover {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  padding-bottom: 3rem;
 }
 
 .post-card {
@@ -1892,7 +1893,7 @@ a.tag:hover {
    ============================================================ */
 
 .about-page {
-  padding: 2rem 1.25rem 4rem;
+  padding: 2.5rem 1.25rem 4rem;
   text-align: left;
   max-width: 1000px;
   margin: 0 auto;
@@ -3159,6 +3160,11 @@ a.footer-stat:hover {
   /* Profile card cachée sur mobile */
   .profile-card {
     display: none;
+  }
+
+  /* About page : espace en haut sur mobile */
+  .about-page {
+    padding-top: 2rem;
   }
 
   /* Header : theme-btn reste visible, seul le nav se replie */
