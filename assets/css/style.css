@@ -1100,7 +1100,6 @@ a.tag:hover {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding-bottom: 3rem;
 }
 
 .post-card {
@@ -3003,7 +3002,7 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
   position: relative;
   padding: 2rem 0;
   text-align: center;
-  margin-top: 3rem;
+  margin-top: auto;
 }
 
 .site-footer::before {
@@ -3170,7 +3169,7 @@ a.footer-stat:hover {
 
   /* Espace avant le footer sur mobile */
   .site-footer {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
   }
 
   /* Header : theme-btn reste visible, seul le nav se replie */
