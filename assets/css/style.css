@@ -3021,7 +3021,7 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
   position: relative;
   padding: 2rem 0;
   text-align: center;
-  margin-top: auto;
+  margin-top: 3rem;
 }
 
 .site-footer::before {
