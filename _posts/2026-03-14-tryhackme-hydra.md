@@ -186,4 +186,4 @@ flag2.txt
 THM{c8eeb0468febbadea859baeb33b2541b}
 ```
 
-**Happy hacking !**
+<span class="happy-hacking">Happy hacking !</span>
