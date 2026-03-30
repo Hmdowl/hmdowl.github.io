@@ -202,6 +202,7 @@ body::after  { right: max(0px, calc(50% - 530px)); }
   transition: background-color 0.3s ease;
 }
 
+
 .site-header::before {
   content: '';
   position: absolute;
@@ -3002,7 +3003,7 @@ details[open] .erasmus-summary::after { transform: rotate(90deg); }
   position: relative;
   padding: 2rem 0;
   text-align: center;
-  margin-top: auto;
+  margin-top: 3rem;
 }
 
 .site-footer::before {
@@ -3162,9 +3163,14 @@ a.footer-stat:hover {
     display: none;
   }
 
-  /* About page : espace en haut sur mobile */
-  .about-page {
-    padding-top: 2rem;
+  /* Espace entre header sticky et contenu sur mobile */
+  #main-content {
+    padding-top: 0.75rem;
+  }
+
+  /* Espace avant le footer sur mobile */
+  .site-footer {
+    margin-top: 2.5rem;
   }
 
   /* Header : theme-btn reste visible, seul le nav se replie */
