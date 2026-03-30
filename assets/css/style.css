@@ -1100,6 +1100,7 @@ a.tag:hover {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .post-card {
@@ -1715,6 +1716,7 @@ a.tag:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .ctf-card {
