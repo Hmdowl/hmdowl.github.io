@@ -1159,6 +1159,25 @@ a.tag:hover {
   color: var(--accent);
 }
 
+/* Mini calendrier avec jour */
+.date-cal {
+  position: relative;
+  display: inline-block;
+  font-size: 1.1em;
+  margin-right: 0.3rem;
+  color: var(--accent);
+}
+.date-cal__day {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.5em;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+}
+
 .post-card__platform-logo {
   width: 18px;
   height: 18px;

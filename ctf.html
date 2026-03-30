@@ -118,7 +118,7 @@ permalink: /ctf.html
         </div>
         <div class="post-card__meta">
           <span class="post-date">
-            <span class="author-emoji">📅</span>
+            <span class="date-cal"><i class="fas fa-calendar"></i><span class="date-cal__day">{{ post.date | date: "%d" }}</span></span>
             {% include date_fr.html date=post.date %}
           </span>
           <span class="post-author">
