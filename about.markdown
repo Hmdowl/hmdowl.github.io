@@ -230,11 +230,6 @@ permalink: /about.html
 
     </div>
 
-    <div class="cv-download">
-      <a href="{{ '/assets/cv/cv-hamed-louma.pdf' | relative_url }}" class="cv-download__btn" download>
-        <i class="fas fa-file-pdf"></i> Télécharger mon CV
-      </a>
-    </div>
 
   </div>
 

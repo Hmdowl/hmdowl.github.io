@@ -9,23 +9,6 @@ permalink: /ctf.html
   <!-- Page header -->
   <div class="page-header">
     <h1 class="page-title">CTF Writeups</h1>
-    <div class="ctf-platform-stats">
-      <a href="{{ site.author.tryhackme }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link platform-stat--thm">
-        <img src="{{ '/assets/images/platforms/thm.png' | relative_url }}" alt="TryHackMe" class="platform-logo" onerror="this.style.display='none'">
-        <span>TryHackMe</span>
-        <strong>30 rooms · Top 15%</strong>
-      </a>
-      <a href="{{ site.author.hackthebox }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link platform-stat--htb">
-        <img src="{{ '/assets/images/platforms/htb.png' | relative_url }}" alt="HackTheBox" class="platform-logo platform-logo--htb" onerror="this.style.display='none'">
-        <span>HackTheBox</span>
-        <strong>Noob</strong>
-      </a>
-      <a href="{{ site.author.rootme }}" target="_blank" rel="noopener" class="platform-stat platform-stat--link platform-stat--rootme">
-        <img src="{{ '/assets/images/platforms/rootme.png' | relative_url }}" alt="Root-Me" class="platform-logo platform-logo--rootme" onerror="this.style.display='none'">
-        <span>Root-Me</span>
-        <strong>170 pts · 15 challenges</strong>
-      </a>
-    </div>
   </div>
 
   <!-- Filters -->
@@ -41,46 +24,14 @@ permalink: /ctf.html
     </div>
 
     <div class="filter-groups">
-
-      <!-- Platform filter -->
-      <div class="filter-group">
-        <label class="filter-label">Plateforme :</label>
-        <div class="filter-btns">
-          <button class="filter-btn active" data-filter="platform" data-value="all">Tous</button>
-          <button class="filter-btn" data-filter="platform" data-value="tryhackme">
-            <i class="fas fa-flag"></i> TryHackMe
-          </button>
-          <button class="filter-btn" data-filter="platform" data-value="hackthebox">
-            <i class="fas fa-box"></i> HackTheBox
-          </button>
-          <button class="filter-btn" data-filter="platform" data-value="rootme">
-            <i class="fas fa-terminal"></i> Root-Me
-          </button>
-        </div>
-      </div>
-
-      <!-- Difficulty filter -->
-      <div class="filter-group">
-        <label class="filter-label">Difficulté :</label>
-        <div class="filter-btns">
-          <button class="filter-btn active" data-filter="difficulty" data-value="all">Tous</button>
-          <button class="filter-btn difficulty-easy"   data-filter="difficulty" data-value="easy">Easy</button>
-          <button class="filter-btn difficulty-medium" data-filter="difficulty" data-value="medium">Medium</button>
-          <button class="filter-btn difficulty-hard"   data-filter="difficulty" data-value="hard">Hard</button>
-        </div>
-      </div>
-
-      <!-- Sort -->
       <div class="filter-group">
         <label class="filter-label">Trier par :</label>
         <select class="filter-select" id="ctf-sort">
           <option value="newest">Plus récents</option>
           <option value="oldest">Plus anciens</option>
           <option value="title">Par titre</option>
-          <option value="difficulty">Par difficulté</option>
         </select>
       </div>
-
     </div>
 
     <div class="filter-count">
